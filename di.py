@@ -9,123 +9,6 @@ from PyQt6.QtGui import QIcon, QPixmap
 
 import subprocess
 
-
-template = '''<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>585</width>
-    <height>303</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <widget class="QLabel" name="photo">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>141</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="name">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>210</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Description_name">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>20</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Описание</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Description">
-   <property name="geometry">
-    <rect>
-     <x>246</x>
-     <y>42</y>
-     <width>261</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>250</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>От чего лечит:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="treatment">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>245</y>
-     <width>311</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_exex">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>10</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Назад</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../../Downloads/ikonka.png</normaloff>../../Downloads/ikonka.png</iconset>
-   </property>
-  </widget>
- </widget>
- <resources/>
- <connections/>
-</ui>'''
-
-
 class dia(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -145,18 +28,18 @@ class dia(QMainWindow):
 
         # Создание курсора
         self.cur = self.con.cursor()
-        f = io.StringIO(template)
-        uic.loadUi(f, self)
+        # Загружаем дизайн
+        uic.loadUi("QT/description.ui", self)
 
-        self.pushButton_exex.clicked.connect(self.my_exit)
+        self.pushButton.clicked.connect(self.my_exit)
 
 
         self.con = sqlite3.connect('db/lk.db')
 
         # Меняет изображение кнопки
-        self.pushButton_exex.setStyleSheet("border-image : url(pmg/plants_son.webp);")
+        self.pushButton.setStyleSheet("border-image : url(pmg/plants_son.webp);")
         size_button = int((min(self.width(), self.height()) // 10) / 1.54)
-        self.pushButton_exex.setFixedSize(size_button + 25, size_button)
+        self.pushButton.setFixedSize(size_button + 25, size_button)
 
         # Создание курсора
         self.cur = self.con.cursor()
